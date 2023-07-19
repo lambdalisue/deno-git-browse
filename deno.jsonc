@@ -1,0 +1,8 @@
+{
+  "lock": false,
+  "tasks": {
+    "test": "deno test -A --parallel --doc",
+    "check": "deno check **/*.ts",
+    "upgrade": "deno run -A https://deno.land/x/udd/main.ts **/*.ts"
+  }
+}
