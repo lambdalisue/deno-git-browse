@@ -4,6 +4,7 @@ USAGE
   browse [options] [--path=PATH] [COMMITISH]
   browse [options] --home
   browse [options] --commit [COMMITISH]
+  browse [options] --pr [COMMITISH]
 
 OPTIONS
   -h, --help           Display this help message.
@@ -41,3 +42,12 @@ EXAMPLES
 
   $ browse --commit fd28fa8
   #=> Opens a commit page of fd28fa8 commit
+
+  $ browse --pr
+  #=> Opens a pull request page that contains the HEAD commit of the current branch
+
+  $ browse --pr my-awesome-branch
+  #=> Opens a pull request page that contains the HEAD commit of my-awesome-branch branch
+
+  $ browse --pr fd28fa8
+  #=> Opens a pull request page that contains the fd28fa8 commit
