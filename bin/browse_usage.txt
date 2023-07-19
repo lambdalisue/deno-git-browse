@@ -1,0 +1,43 @@
+Open the URL of the hosting service for the repository using the system web browser.
+
+USAGE
+  browse [options] [--path=PATH] [COMMITISH]
+  browse [options] --home
+  browse [options] --commit [COMMITISH]
+
+OPTIONS
+  -h, --help           Display this help message.
+  -n, --no-browser     Print a URL instead of opening it in the browser.
+      --permalink      Use a permalink instead of a regular URL.
+      --remote=REMOTE  Use a URL from the specified remote repository.
+
+EXAMPLES
+  $ browse
+  #=> Opens a tree page of the current working directory in the HEAD commit of the current branch
+
+  $ browse --path=README.md
+  #=> Opens a blob page of README.md in the HEAD commit of the current branch
+
+  $ browse --path=README.md:10
+  #=> Opens a blob page of README.md with line 10 in the HEAD commit of the current branch
+
+  $ browse --path=README.md:10:20
+  #=> Opens a blob page of README.md with lines 10 to 20 in the HEAD commit of the current branch
+
+  $ browse --path=README.md my-awesome-branch
+  #=> Opens a blob page of README.md in the HEAD commit of my-awesome-branch branch
+
+  $ browse --path=README.md fd28fa8
+  #=> Opens a blob page of README.md in the fd28fa8 commit
+
+  $ browse --home
+  #=> Opens the home page of the repository
+
+  $ browse --commit
+  #=> Opens a commit page of the current branch
+
+  $ browse --commit my-awesome-branch
+  #=> Opens a commit page of my-awesome-branch branch
+
+  $ browse --commit fd28fa8
+  #=> Opens a commit page of fd28fa8 commit
