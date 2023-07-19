@@ -8,6 +8,7 @@ import {
   getCommitURL,
   getHomeURL,
   getObjectURL,
+  getPullRequestURL,
 } from "../mod.ts";
 
 export type Options = {
@@ -15,6 +16,7 @@ export type Options = {
   path?: string;
   home?: boolean;
   commit?: boolean;
+  pr?: boolean;
   permalink?: boolean;
   aliases?: Record<string, string>;
 };
@@ -25,6 +27,10 @@ export async function getURL(
 ): Promise<URL> {
   if (options.home) {
     return getHomeURL(options);
+  }
+  if (options.pr) {
+    commitish = await getCommitSHA1(commitish);
+    return getPullRequestURL(commitish, options);
   }
   commitish = options.permalink
     ? await getCommitSHA1(commitish)
@@ -43,6 +49,7 @@ async function main(args: string[]): Promise<void> {
       "home",
       "no-browser",
       "permalink",
+      "pr",
     ],
     string: ["remote", "path"],
     alias: {
