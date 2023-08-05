@@ -12,6 +12,7 @@ import {
 } from "../mod.ts";
 
 export type Options = {
+  cwd?: string;
   remote?: string;
   path?: string;
   home?: boolean;
@@ -29,12 +30,12 @@ export async function getURL(
     return getHomeURL(options);
   }
   if (options.pr) {
-    commitish = await getCommitSHA1(commitish);
+    commitish = await getCommitSHA1(commitish, options);
     return getPullRequestURL(commitish, options);
   }
   commitish = options.permalink
-    ? await getCommitSHA1(commitish)
-    : await getCommitAbbrevRef(commitish);
+    ? await getCommitSHA1(commitish, options)
+    : await getCommitAbbrevRef(commitish, options);
   if (options.commit) {
     return getCommitURL(commitish, options);
   }
