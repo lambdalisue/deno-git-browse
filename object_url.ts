@@ -39,12 +39,12 @@ async function getObjectType(
   commitish: string,
   path: string,
   options: ExecuteOptions = {},
-): Promise<ObjectType> {
+): Promise<ObjectType | undefined> {
   const stdout = await execute(
-    ["ls-tree", "-t", "--format=%(objecttype)", commitish, path],
+    ["ls-tree", "-t", commitish, path],
     options,
   );
-  return stdout.trim().split("\n").at(0) as ObjectType;
+  return stdout.trim().split("\n").at(0)?.split(" ").at(1) as ObjectType;
 }
 
 function parsePath(path: string): [string, Range | undefined] {
