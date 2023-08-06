@@ -45,7 +45,7 @@ export const service: HostingService = {
 
 function formatURLBase(fetchURL: URL): string {
   const [owner, repo] = fetchURL.pathname.split("/").slice(1);
-  return `https://${fetchURL.hostname}/${owner}/${repo}`;
+  return `https://${fetchURL.hostname}/${owner}/${repo.replace(/\.git$/, "")}`;
 }
 
 function formatSuffix(range: Range | undefined): string {
