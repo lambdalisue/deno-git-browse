@@ -47,12 +47,12 @@ async function getPullRequestContains(
   const branch = await getRemoteDefaultBranch(remote, options) ?? "main";
   const sha = await getCommitSHA1(commitish, options);
   let stdout: string;
+  // The sha may points to a merge commit itself.
   stdout = await execute(
     [
       "log",
-      "--merges",
       "--oneline",
-      "--reverse",
+      "-1",
       sha,
     ],
     options,
@@ -61,6 +61,7 @@ async function getPullRequestContains(
   if (pr) {
     return pr;
   }
+  // Try to find the merge commit that contains the sha
   const ancestraryPath = `${sha}...${remote}/${branch}`;
   stdout = await execute(
     [
