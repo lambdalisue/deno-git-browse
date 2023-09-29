@@ -1,19 +1,15 @@
-import { common } from "https://deno.land/std@0.194.0/path/mod.ts";
 import { execute, ExecuteOptions } from "./process.ts";
 
 export async function getRemoteContains(
-  commitish: string,
+  _: string,
   options: ExecuteOptions = {},
 ): Promise<string | undefined> {
   const stdout = await execute(
-    ["branch", "-r", "--contains", commitish, "--format=%(refname:short)"],
+    // ref: https://git-scm.com/docs/git-config/2.30.0#Documentation/git-config.txt-clonedefaultRemoteName
+    ["config", "--default", "origin", "--get", "clone.defaultRemoteName"],
     options,
   );
-  const result = common(stdout.trim().split("\n"));
-  if (!result) {
-    return undefined;
-  }
-  return result?.substring(0, result.length - 1);
+  return stdout.trim().split("\n").at(0);
 }
 
 export async function getRemoteFetchURL(
