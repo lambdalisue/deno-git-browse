@@ -12,7 +12,7 @@ export async function getPullRequestURL(
   options: Options = {},
 ): Promise<URL> {
   if (!options.remote) {
-    const remote = await getRemoteContains(commitish, options);
+    const remote = await getRemoteContains(options);
     return getPullRequestURL(commitish, {
       ...options,
       remote: remote ?? "origin",

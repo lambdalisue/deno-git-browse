@@ -14,7 +14,7 @@ export async function getObjectURL(
   options: Options = {},
 ): Promise<URL> {
   if (!options.remote) {
-    const remote = await getRemoteContains(commitish, options);
+    const remote = await getRemoteContains(options);
     return getObjectURL(commitish, path, {
       ...options,
       remote: remote ?? "origin",

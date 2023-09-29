@@ -11,7 +11,7 @@ export async function getHomeURL(
   options: Options = {},
 ): Promise<URL> {
   if (!options.remote) {
-    const remote = await getRemoteContains("HEAD", options);
+    const remote = await getRemoteContains(options);
     return getHomeURL({ ...options, remote: remote ?? "origin" });
   }
   const fetchURL = await getRemoteFetchURL(options.remote, options);

@@ -1,7 +1,6 @@
 import { execute, ExecuteOptions } from "./process.ts";
 
 export async function getRemoteContains(
-  _: string,
   options: ExecuteOptions = {},
 ): Promise<string | undefined> {
   const stdout = await execute(

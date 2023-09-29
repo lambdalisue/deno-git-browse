@@ -12,7 +12,7 @@ export async function getCommitURL(
   options: Options = {},
 ): Promise<URL> {
   if (!options.remote) {
-    const remote = await getRemoteContains(commitish, options);
+    const remote = await getRemoteContains(options);
     return getCommitURL(commitish, { ...options, remote: remote ?? "origin" });
   }
   const fetchURL = await getRemoteFetchURL(options.remote, options);
