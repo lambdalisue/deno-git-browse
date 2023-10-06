@@ -10,6 +10,7 @@ import {
   getObjectURL,
   getPullRequestURL,
 } from "../mod.ts";
+import { __throw } from "../util.ts";
 
 export type Options = {
   cwd?: string;
@@ -30,12 +31,18 @@ export async function getURL(
     return getHomeURL(options);
   }
   if (options.pr) {
-    commitish = await getCommitSHA1(commitish, options);
+    commitish = await getCommitSHA1(commitish, options) ?? __throw(
+      new Error(`No commit found for ${commitish}`),
+    );
     return getPullRequestURL(commitish, options);
   }
   commitish = options.permalink
-    ? await getCommitSHA1(commitish, options)
-    : await getCommitAbbrevRef(commitish, options);
+    ? await getCommitSHA1(commitish, options) ?? __throw(
+      new Error(`No commit found for ${commitish}`),
+    )
+    : await getCommitAbbrevRef(commitish, options) ?? __throw(
+      new Error(`No commit found for ${commitish}`),
+    );
   if (options.commit) {
     return getCommitURL(commitish, options);
   }

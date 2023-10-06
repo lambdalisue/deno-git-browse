@@ -1,4 +1,13 @@
-import { execute, ExecuteOptions } from "./process.ts";
+import { execute, ExecuteError, ExecuteOptions } from "./process.ts";
+
+/**
+ * A helper function to throw error
+ *
+ * https://github.com/tc39/proposal-throw-expressions
+ */
+export function __throw(err: unknown): never {
+  throw err;
+}
 
 /**
  * Returns a remote name that contains the given commitish.
@@ -57,24 +66,56 @@ export async function getRemoteFetchURL(
   }
 }
 
+/**
+ * Returns a commit's SHA-1.
+ *
+ * It returns undefined if the commitish does not exist.
+ */
 export async function getCommitSHA1(
   commitish: string,
   options: ExecuteOptions = {},
-): Promise<string> {
-  const stdout = await execute(
-    ["rev-parse", commitish],
-    options,
-  );
-  return stdout.trim();
+): Promise<string | undefined> {
+  try {
+    const stdout = await execute(
+      ["rev-parse", commitish],
+      options,
+    );
+    return stdout.trim();
+  } catch (err: unknown) {
+    if (err instanceof ExecuteError && err.code === 128) {
+      // ...
+      // fatal: ambiguous argument '...': unknown revision or path not in the working tree.
+      // Use '--' to separate paths from revisions, like this:
+      // 'git <command> [<revision>...] -- [<file>...]'
+      return undefined;
+    }
+    throw err;
+  }
 }
 
+/**
+ * Returns a commit's abbrev ref
+ *
+ * It returns undefined if the commitish does not exist.
+ */
 export async function getCommitAbbrevRef(
   commitish: string,
   options: ExecuteOptions = {},
-): Promise<string> {
-  const stdout = await execute(
-    ["rev-parse", "--abbrev-ref", commitish],
-    options,
-  );
-  return stdout.trim() || commitish;
+): Promise<string | undefined> {
+  try {
+    const stdout = await execute(
+      ["rev-parse", "--abbrev-ref", commitish],
+      options,
+    );
+    return stdout.trim() || commitish;
+  } catch (err: unknown) {
+    if (err instanceof ExecuteError && err.code === 128) {
+      // ...
+      // fatal: ambiguous argument '...': unknown revision or path not in the working tree.
+      // Use '--' to separate paths from revisions, like this:
+      // 'git <command> [<revision>...] -- [<file>...]'
+      return undefined;
+    }
+    throw err;
+  }
 }

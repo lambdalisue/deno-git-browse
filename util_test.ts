@@ -3,7 +3,7 @@ import {
   assertEquals,
   unreachable,
 } from "https://deno.land/std@0.202.0/assert/mod.ts";
-import { _internals } from "./process.ts";
+import { _internals, ExecuteError } from "./process.ts";
 import {
   getCommitAbbrevRef,
   getCommitSHA1,
@@ -265,6 +265,29 @@ Deno.test("getRemoteFetchURL", async (t) => {
 
 Deno.test("getCommitSHA1", async (t) => {
   await t.step(
+    "returns undefined when the commitish is not found",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "rev-parse") {
+          throw new ExecuteError(
+            args,
+            128,
+            "",
+            "<<commitish>>\nfatal: ambiguous argument '<<commitish>>': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+          );
+        }
+        unreachable();
+      });
+      try {
+        const sha1 = await getCommitSHA1("<<commitish>>");
+        assertEquals(sha1, undefined);
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
     "returns commit SHA1",
     async () => {
       const expect = "8e3367e40b91850d7f7864b4a8984d25f6e9419e";
@@ -286,7 +309,30 @@ Deno.test("getCommitSHA1", async (t) => {
 
 Deno.test("getCommitAbbrevRef", async (t) => {
   await t.step(
-    "returns commit SHA1",
+    "returns undefined when the commitish is not found",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "rev-parse") {
+          throw new ExecuteError(
+            args,
+            128,
+            "",
+            "<<commitish>>\nfatal: ambiguous argument '<<commitish>>': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+          );
+        }
+        unreachable();
+      });
+      try {
+        const sha1 = await getCommitAbbrevRef("<<commitish>>");
+        assertEquals(sha1, undefined);
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
+    "returns commit abbrev ref",
     async () => {
       const executeStub = stub(_internals, "execute", (args, _options) => {
         if (args.at(0) === "rev-parse") {

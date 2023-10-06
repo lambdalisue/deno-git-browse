@@ -1,6 +1,11 @@
 import { execute, ExecuteOptions } from "./process.ts";
 import { getHostingService } from "./hosting_service/mod.ts";
-import { getCommitSHA1, getRemoteContains, getRemoteFetchURL } from "./util.ts";
+import {
+  __throw,
+  getCommitSHA1,
+  getRemoteContains,
+  getRemoteFetchURL,
+} from "./util.ts";
 
 type Options = ExecuteOptions & {
   remote?: string;
@@ -45,7 +50,9 @@ async function getPullRequestContains(
   options: ExecuteOptions = {},
 ): Promise<number | undefined> {
   const branch = await getRemoteDefaultBranch(remote, options) ?? "main";
-  const sha = await getCommitSHA1(commitish, options);
+  const sha = await getCommitSHA1(commitish, options) ?? __throw(
+    new Error(`No commit found for ${commitish}`),
+  );
   let stdout: string;
   // The sha may points to a merge commit itself.
   stdout = await execute(
