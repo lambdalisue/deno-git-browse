@@ -30,19 +30,31 @@ export async function getRemoteContains(
   }
 }
 
+/**
+ * Returns a remote's fetch URL.
+ *
+ * It returns undefined if the remote does not exist.
+ * If the remote has multiple URLs, it returns the first one.
+ */
 export async function getRemoteFetchURL(
   remote: string,
   options: ExecuteOptions = {},
 ): Promise<URL | undefined> {
-  const stdout = await execute(
-    ["remote", "get-url", remote],
-    options,
-  );
-  const url = stdout.trim().split("\n").at(0);
-  if (!url) {
-    return undefined;
+  try {
+    const stdout = await execute(
+      ["remote", "get-url", remote],
+      options,
+    );
+    // a remote always has at least one URL
+    const url = stdout.trim().split("\n").at(0)!;
+    return new URL(url.replace(/^git@([^:]+):(.*)\.git$/, "ssh://git@$1/$2"));
+  } catch (err: unknown) {
+    if (err instanceof ExecuteError && err.code === 2) {
+      // error: No such remote '...'
+      return undefined;
+    }
+    throw err;
   }
-  return new URL(url.replace(/^git@([^:]+):(.*)\.git$/, "ssh://git@$1/$2"));
 }
 
 export async function getCommitSHA1(

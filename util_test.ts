@@ -171,6 +171,29 @@ Deno.test("getRemoteContains", async (t) => {
 
 Deno.test("getRemoteFetchURL", async (t) => {
   await t.step(
+    "returns undefined if no remote exists",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          throw new ExecuteError(
+            args,
+            2,
+            "",
+            "error: No such remote 'origin'\n",
+          );
+        }
+        unreachable();
+      });
+      try {
+        const url = await getRemoteFetchURL("origin");
+        assertEquals(url, undefined);
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
     "returns URL of the remote (HTTP URL)",
     async () => {
       const executeStub = stub(_internals, "execute", (args, _options) => {
