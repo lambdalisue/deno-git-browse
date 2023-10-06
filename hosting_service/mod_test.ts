@@ -1,12 +1,22 @@
-import { assertSnapshot } from "https://deno.land/std@0.194.0/testing/snapshot.ts";
-import { getHostingService } from "./mod.ts";
+import { assertRejects } from "https://deno.land/std@0.202.0/assert/mod.ts";
+import { assertSnapshot } from "https://deno.land/std@0.202.0/testing/snapshot.ts";
+import { getHostingService, UnsupportedHostingServiceError } from "./mod.ts";
 
 Deno.test("getHostingService", async (t) => {
+  await t.step("throws error for unsupported hosting service", async () => {
+    const url = new URL("https://example.com/lambdalisue/gin.vim");
+    await assertRejects(
+      () => {
+        return getHostingService(url);
+      },
+      UnsupportedHostingServiceError,
+    );
+  });
+
   const urls = [
     new URL("ssh://git@github.com/lambdalisue/gin.vim"),
     new URL("https://github.com/lambdalisue/gin.vim"),
   ];
-
   for (const url of urls) {
     const svc = await getHostingService(url);
 
