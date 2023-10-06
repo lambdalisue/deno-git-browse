@@ -20,7 +20,12 @@ Deno.test("getRemoteContains", async (t) => {
           return Promise.resolve("origin\nfork\n");
         }
         if (args.at(0) === "branch") {
-          return Promise.resolve("\n");
+          throw new ExecuteError(
+            args,
+            129,
+            "",
+            "error: malformed object name <<commitish>>\n",
+          );
         }
         unreachable();
       });
