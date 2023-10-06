@@ -5,7 +5,14 @@ export type ExecuteOptions = Omit<
   "args" | "stdin" | "stdout" | "stderr"
 >;
 
-export async function execute(
+export function execute(
+  args: string[],
+  options: ExecuteOptions = {},
+): Promise<string> {
+  return _internals.execute(args, options);
+}
+
+async function _execute(
   args: string[],
   options: ExecuteOptions = {},
 ): Promise<string> {
@@ -49,3 +56,8 @@ export class ExecuteError extends Error {
     this.name = this.constructor.name;
   }
 }
+
+// For internal stub testing
+export const _internals = {
+  execute: _execute,
+};
