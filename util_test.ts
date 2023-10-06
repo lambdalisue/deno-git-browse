@@ -16,6 +16,9 @@ Deno.test("getRemoteContains", async (t) => {
     "returns undefined if no remote contains the commitish",
     async () => {
       const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
         if (args.at(0) === "branch") {
           return Promise.resolve("\n");
         }
@@ -34,6 +37,9 @@ Deno.test("getRemoteContains", async (t) => {
     "returns 'origin' if 'origin/my-awesome-branch' contains the commitish",
     async () => {
       const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
         if (args.at(0) === "branch") {
           return Promise.resolve("origin/my-awesome-branch\n");
         }
@@ -52,6 +58,9 @@ Deno.test("getRemoteContains", async (t) => {
     "returns 'origin' if 'origin/HEAD' and 'origin/my-awesome-branch' contains the commitish",
     async () => {
       const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
         if (args.at(0) === "branch") {
           return Promise.resolve("origin/HEAD\norigin/my-awesome-branch\n");
         }
@@ -59,7 +68,95 @@ Deno.test("getRemoteContains", async (t) => {
       });
       try {
         const remote = await getRemoteContains("<<commitish>>");
+        assertEquals(remote, "origin");
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
+    "returns 'fork' if 'fork/my-awesome-branch' contains the commitish",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
+        if (args.at(0) === "branch") {
+          return Promise.resolve("fork/my-awesome-branch\n");
+        }
+        unreachable();
+      });
+      try {
+        const remote = await getRemoteContains("<<commitish>>");
         assertEquals(remote, "fork");
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
+    "returns 'origin' if 'origin/feature/my-awesome-branch' contains the commitish (#9)",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
+        if (args.at(0) === "branch") {
+          return Promise.resolve("origin/feature/my-awesome-branch\n");
+        }
+        unreachable();
+      });
+      try {
+        const remote = await getRemoteContains("<<commitish>>");
+        assertEquals(remote, "origin");
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
+    "returns 'fork/my-awesome-fork' if 'fork/my-awesome-fork/feature/my-awesome-branch' contains the commitish",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork/my-awesome-fork\n");
+        }
+        if (args.at(0) === "branch") {
+          return Promise.resolve(
+            "fork/my-awesome-fork/feature/my-awesome-branch\n",
+          );
+        }
+        unreachable();
+      });
+      try {
+        const remote = await getRemoteContains("<<commitish>>");
+        assertEquals(remote, "fork/my-awesome-fork");
+      } finally {
+        executeStub.restore();
+      }
+    },
+  );
+
+  await t.step(
+    "returns 'origin' if 'origin/my-awesome-branch' and 'fork/my-awesome-branch' contains the commitish",
+    async () => {
+      const executeStub = stub(_internals, "execute", (args, _options) => {
+        if (args.at(0) === "remote") {
+          return Promise.resolve("origin\nfork\n");
+        }
+        if (args.at(0) === "branch") {
+          return Promise.resolve(
+            "fork/my-awesome-branch\norigin/my-awesome-branch\n",
+          );
+        }
+        unreachable();
+      });
+      try {
+        const remote = await getRemoteContains("<<commitish>>");
+        assertEquals(remote, "origin");
       } finally {
         executeStub.restore();
       }

@@ -1,19 +1,19 @@
-import { common } from "https://deno.land/std@0.194.0/path/mod.ts";
 import { execute, ExecuteOptions } from "./process.ts";
 
 export async function getRemoteContains(
   commitish: string,
   options: ExecuteOptions = {},
 ): Promise<string | undefined> {
-  const stdout = await execute(
+  const branches = (await execute(
     ["branch", "-r", "--contains", commitish, "--format=%(refname:short)"],
     options,
-  );
-  const result = common(stdout.trim().split("\n"));
-  if (!result) {
-    return undefined;
-  }
-  return result?.substring(0, result.length - 1);
+  )).trim().split("\n");
+  const remotes = (await execute(["remote"], options)).trim().split("\n");
+  const remoteContains = remotes.filter((remote) => {
+    return branches.some((branch) => branch.startsWith(`${remote}/`));
+  });
+  // Prefer "origin" if it exists
+  return remoteContains.includes("origin") ? "origin" : remoteContains.at(0);
 }
 
 export async function getRemoteFetchURL(
