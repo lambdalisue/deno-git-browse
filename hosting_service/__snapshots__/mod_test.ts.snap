@@ -9,35 +9,35 @@ snapshot[`getHostingService 1`] = `
 
 snapshot[`getHostingService 2`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/commit/main",
+  result: "https://github.com/lambdalisue/deno-git-browse/commit/2120c87633f4059656e8aada8eebe62768892b46",
   url: "ssh://git@github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 3`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/tree/main/bin",
+  result: "https://github.com/lambdalisue/deno-git-browse/tree/v0.1.0/bin",
   url: "ssh://git@github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 4`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md",
   url: "ssh://git@github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 5`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10",
   url: "ssh://git@github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 6`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10-L20",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10-L20",
   url: "ssh://git@github.com/lambdalisue/deno-git-browse",
 }
 `;
@@ -58,35 +58,35 @@ snapshot[`getHostingService 8`] = `
 
 snapshot[`getHostingService 9`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/commit/main",
+  result: "https://github.com/lambdalisue/deno-git-browse/commit/2120c87633f4059656e8aada8eebe62768892b46",
   url: "https://github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 10`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/tree/main/bin",
+  result: "https://github.com/lambdalisue/deno-git-browse/tree/v0.1.0/bin",
   url: "https://github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 11`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md",
   url: "https://github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 12`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10",
   url: "https://github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 13`] = `
 {
-  result: "https://github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10-L20",
+  result: "https://github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10-L20",
   url: "https://github.com/lambdalisue/deno-git-browse",
 }
 `;
@@ -107,35 +107,35 @@ snapshot[`getHostingService with alias 1`] = `
 
 snapshot[`getHostingService with alias 2`] = `
 {
-  result: "https://my-github.com/lambdalisue/deno-git-browse/commit/main",
+  result: "https://my-github.com/lambdalisue/deno-git-browse/commit/2120c87633f4059656e8aada8eebe62768892b46",
   url: "https://my-github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService with alias 3`] = `
 {
-  result: "https://my-github.com/lambdalisue/deno-git-browse/tree/main/bin",
+  result: "https://my-github.com/lambdalisue/deno-git-browse/tree/v0.1.0/bin",
   url: "https://my-github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService with alias 4`] = `
 {
-  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/main/README.md",
+  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md",
   url: "https://my-github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService with alias 5`] = `
 {
-  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10",
+  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10",
   url: "https://my-github.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService with alias 6`] = `
 {
-  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/main/README.md?plain=1#L10-L20",
+  result: "https://my-github.com/lambdalisue/deno-git-browse/blob/v0.1.0/README.md?plain=1#L10-L20",
   url: "https://my-github.com/lambdalisue/deno-git-browse",
 }
 `;

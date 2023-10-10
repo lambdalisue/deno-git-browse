@@ -1,18 +1,20 @@
 import type { HostingService, Range } from "../mod.ts";
 import type { ExecuteOptions } from "../../process.ts";
+import { getCommitSHA1 } from "../../util.ts";
 
 export const service: HostingService = {
   getHomeURL(fetchURL: URL, _options?: ExecuteOptions): Promise<URL> {
     return Promise.resolve(new URL(formatURLBase(fetchURL)));
   },
 
-  getCommitURL(
+  async getCommitURL(
     fetchURL: URL,
     commitish: string,
-    _options?: ExecuteOptions,
+    options?: ExecuteOptions,
   ): Promise<URL> {
+    const sha = await getCommitSHA1(commitish, options) ?? commitish;
     const urlBase = formatURLBase(fetchURL);
-    const pathname = `commit/${commitish}`;
+    const pathname = `commit/${sha}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
