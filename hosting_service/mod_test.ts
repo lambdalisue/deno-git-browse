@@ -46,7 +46,7 @@ Deno.test("getHostingService", async (t) => {
       });
     });
 
-    await t.step(`getBlobURL for ${url}`, async () => {
+    await t.step(`getBlobURL for ${url} (Markdown)`, async () => {
       const result = await svc.getBlobURL(url, "v0.1.0", "README.md");
       await assertSnapshot(t, {
         url: url.href,
@@ -54,8 +54,42 @@ Deno.test("getHostingService", async (t) => {
       });
     });
 
+    await t.step(
+      `getBlobURL with lineStart for ${url} (Markdown)`,
+      async () => {
+        const result = await svc.getBlobURL(url, "v0.1.0", "README.md", {
+          range: 10,
+        });
+        await assertSnapshot(t, {
+          url: url.href,
+          result: result.href,
+        });
+      },
+    );
+
+    await t.step(
+      `getBlobURL with lineStart/lineEnd for ${url} (Markdown)`,
+      async () => {
+        const result = await svc.getBlobURL(url, "v0.1.0", "README.md", {
+          range: [10, 20],
+        });
+        await assertSnapshot(t, {
+          url: url.href,
+          result: result.href,
+        });
+      },
+    );
+
+    await t.step(`getBlobURL for ${url}`, async () => {
+      const result = await svc.getBlobURL(url, "v0.1.0", "bin/browse.ts");
+      await assertSnapshot(t, {
+        url: url.href,
+        result: result.href,
+      });
+    });
+
     await t.step(`getBlobURL with lineStart for ${url}`, async () => {
-      const result = await svc.getBlobURL(url, "v0.1.0", "README.md", {
+      const result = await svc.getBlobURL(url, "v0.1.0", "bin/browse.ts", {
         range: 10,
       });
       await assertSnapshot(t, {
@@ -67,7 +101,7 @@ Deno.test("getHostingService", async (t) => {
     await t.step(
       `getBlobURL with lineStart/lineEnd for ${url}`,
       async () => {
-        const result = await svc.getBlobURL(url, "v0.1.0", "README.md", {
+        const result = await svc.getBlobURL(url, "v0.1.0", "bin/browse.ts", {
           range: [10, 20],
         });
         await assertSnapshot(t, {
