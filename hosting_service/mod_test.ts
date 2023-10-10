@@ -18,6 +18,8 @@ Deno.test("getHostingService", async (t) => {
     new URL("https://github.com/lambdalisue/deno-git-browse"),
     new URL("ssh://git@gitlab.com/lambdalisue/deno-git-browse"),
     new URL("https://gitlab.com/lambdalisue/deno-git-browse"),
+    new URL("ssh://git@bitbucket.org/lambdalisue/deno-git-browse"),
+    new URL("https://bitbucket.org/lambdalisue/deno-git-browse"),
   ];
   for (const url of urls) {
     const svc = await getHostingService(url);
