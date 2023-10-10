@@ -98,6 +98,90 @@ snapshot[`getHostingService 14`] = `
 }
 `;
 
+snapshot[`getHostingService 15`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 16`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/commit/2120c87633f4059656e8aada8eebe62768892b46",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 17`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/tree/v0.1.0/bin",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 18`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 19`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 20`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10-20",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 21`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 22`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/commit/2120c87633f4059656e8aada8eebe62768892b46",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 23`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/tree/v0.1.0/bin",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 24`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 25`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 26`] = `
+{
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10-20",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+}
+`;
+
 snapshot[`getHostingService with alias 1`] = `
 {
   result: "https://my-github.com/lambdalisue/deno-git-browse",
