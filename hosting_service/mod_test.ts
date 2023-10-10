@@ -21,7 +21,7 @@ Deno.test("getHostingService", async (t) => {
     const svc = await getHostingService(url);
 
     await t.step(`getHomeURL for ${url}`, async () => {
-      const result = svc.getHomeURL(url);
+      const result = await svc.getHomeURL(url);
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -29,7 +29,7 @@ Deno.test("getHostingService", async (t) => {
     });
 
     await t.step(`getCommitURL for ${url}`, async () => {
-      const result = svc.getCommitURL(url, "main");
+      const result = await svc.getCommitURL(url, "main");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -37,7 +37,7 @@ Deno.test("getHostingService", async (t) => {
     });
 
     await t.step(`getTreeURL for ${url}`, async () => {
-      const result = svc.getTreeURL(url, "main", "bin");
+      const result = await svc.getTreeURL(url, "main", "bin");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -45,7 +45,7 @@ Deno.test("getHostingService", async (t) => {
     });
 
     await t.step(`getBlobURL for ${url}`, async () => {
-      const result = svc.getBlobURL(url, "main", "README.md");
+      const result = await svc.getBlobURL(url, "main", "README.md");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -53,7 +53,7 @@ Deno.test("getHostingService", async (t) => {
     });
 
     await t.step(`getBlobURL with lineStart for ${url}`, async () => {
-      const result = svc.getBlobURL(url, "main", "README.md", {
+      const result = await svc.getBlobURL(url, "main", "README.md", {
         range: 10,
       });
       await assertSnapshot(t, {
@@ -65,7 +65,7 @@ Deno.test("getHostingService", async (t) => {
     await t.step(
       `getBlobURL with lineStart/lineEnd for ${url}`,
       async () => {
-        const result = svc.getBlobURL(url, "main", "README.md", {
+        const result = await svc.getBlobURL(url, "main", "README.md", {
           range: [10, 20],
         });
         await assertSnapshot(t, {
@@ -77,7 +77,7 @@ Deno.test("getHostingService", async (t) => {
 
     if (svc.getPullRequestURL) {
       await t.step(`getPullRequestURL for ${url}`, async () => {
-        const result = svc.getPullRequestURL!(url, 1);
+        const result = await svc.getPullRequestURL!(url, 1);
         await assertSnapshot(t, {
           url: url.href,
           result: result.href,
@@ -99,7 +99,7 @@ Deno.test("getHostingService with alias", async (t) => {
     const svc = await getHostingService(url, { aliases });
 
     await t.step(`getHomeURL for ${url}`, async () => {
-      const result = svc.getHomeURL(url);
+      const result = await svc.getHomeURL(url);
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -107,7 +107,7 @@ Deno.test("getHostingService with alias", async (t) => {
     });
 
     await t.step(`getCommitURL for ${url}`, async () => {
-      const result = svc.getCommitURL(url, "main");
+      const result = await svc.getCommitURL(url, "main");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -115,7 +115,7 @@ Deno.test("getHostingService with alias", async (t) => {
     });
 
     await t.step(`getTreeURL for ${url}`, async () => {
-      const result = svc.getTreeURL(url, "main", "bin");
+      const result = await svc.getTreeURL(url, "main", "bin");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -123,7 +123,7 @@ Deno.test("getHostingService with alias", async (t) => {
     });
 
     await t.step(`getBlobURL for ${url}`, async () => {
-      const result = svc.getBlobURL(url, "main", "README.md");
+      const result = await svc.getBlobURL(url, "main", "README.md");
       await assertSnapshot(t, {
         url: url.href,
         result: result.href,
@@ -131,7 +131,7 @@ Deno.test("getHostingService with alias", async (t) => {
     });
 
     await t.step(`getBlobURL with lineStart for ${url}`, async () => {
-      const result = svc.getBlobURL(url, "main", "README.md", {
+      const result = await svc.getBlobURL(url, "main", "README.md", {
         range: 10,
       });
       await assertSnapshot(t, {
@@ -143,7 +143,7 @@ Deno.test("getHostingService with alias", async (t) => {
     await t.step(
       `getBlobURL with lineStart/lineEnd for ${url}`,
       async () => {
-        const result = svc.getBlobURL(url, "main", "README.md", {
+        const result = await svc.getBlobURL(url, "main", "README.md", {
           range: [10, 20],
         });
         await assertSnapshot(t, {
@@ -155,7 +155,7 @@ Deno.test("getHostingService with alias", async (t) => {
 
     if (svc.getPullRequestURL) {
       await t.step(`getPullRequestURL for ${url}`, async () => {
-        const result = svc.getPullRequestURL!(url, 1);
+        const result = await svc.getPullRequestURL!(url, 1);
         await assertSnapshot(t, {
           url: url.href,
           result: result.href,

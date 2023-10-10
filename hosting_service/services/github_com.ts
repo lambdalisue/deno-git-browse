@@ -1,45 +1,52 @@
 import type { HostingService, Range } from "../mod.ts";
+import type { ExecuteOptions } from "../../process.ts";
 
 export const service: HostingService = {
-  getHomeURL(fetchURL: URL): URL {
-    return new URL(formatURLBase(fetchURL));
+  getHomeURL(fetchURL: URL, _options?: ExecuteOptions): Promise<URL> {
+    return Promise.resolve(new URL(formatURLBase(fetchURL)));
   },
 
   getCommitURL(
     fetchURL: URL,
     commitish: string,
-  ): URL {
+    _options?: ExecuteOptions,
+  ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
     const pathname = `commit/${commitish}`;
-    return new URL(`${urlBase}/${pathname}`);
+    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
   getTreeURL(
     fetchURL: URL,
     commitish: string,
     path: string,
-  ): URL {
+    _options?: ExecuteOptions,
+  ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
     const pathname = `tree/${commitish}/${path}`;
-    return new URL(`${urlBase}/${pathname}`);
+    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
   getBlobURL(
     fetchURL: URL,
     commitish: string,
     path: string,
-    { range }: { range?: Range } = {},
-  ): URL {
+    { range }: { range?: Range } & ExecuteOptions = {},
+  ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
     const suffix = formatSuffix(range);
     const pathname = `blob/${commitish}/${path}${suffix}`;
-    return new URL(`${urlBase}/${pathname}`);
+    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
-  getPullRequestURL(fetchURL: URL, n: number): URL {
+  getPullRequestURL(
+    fetchURL: URL,
+    n: number,
+    _options?: ExecuteOptions,
+  ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
     const pathname = `pull/${n}`;
-    return new URL(`${urlBase}/${pathname}`);
+    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 };
 
