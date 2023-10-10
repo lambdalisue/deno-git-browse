@@ -1,20 +1,35 @@
+import type { ExecuteOptions } from "../process.ts";
+
 export type Range = number | [number, number];
 
 export type HostingService = {
-  getHomeURL(fetchURL: URL): URL;
+  getHomeURL(fetchURL: URL, options?: ExecuteOptions): Promise<URL>;
 
-  getCommitURL(fetchURL: URL, commitish: string): URL;
+  getCommitURL(
+    fetchURL: URL,
+    commitish: string,
+    options?: ExecuteOptions,
+  ): Promise<URL>;
 
-  getTreeURL(fetchURL: URL, commitish: string, path: string): URL;
+  getTreeURL(
+    fetchURL: URL,
+    commitish: string,
+    path: string,
+    options?: ExecuteOptions,
+  ): Promise<URL>;
 
   getBlobURL(
     fetchURL: URL,
     commitish: string,
     path: string,
-    options?: { range?: Range },
-  ): URL;
+    options?: { range?: Range } & ExecuteOptions,
+  ): Promise<URL>;
 
-  getPullRequestURL?(fetchURL: URL, number: number): URL;
+  getPullRequestURL?(
+    fetchURL: URL,
+    number: number,
+    options?: ExecuteOptions,
+  ): Promise<URL>;
 };
 
 /**

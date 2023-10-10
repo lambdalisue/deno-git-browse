@@ -1,5 +1,6 @@
 import type { HostingService, Range } from "../mod.ts";
 import type { ExecuteOptions } from "../../process.ts";
+import { extname } from "https://deno.land/std@0.202.0/path/mod.ts";
 import { getCommitSHA1 } from "../../util.ts";
 
 export const service: HostingService = {
@@ -10,11 +11,11 @@ export const service: HostingService = {
   async getCommitURL(
     fetchURL: URL,
     commitish: string,
-    options?: ExecuteOptions,
+    options: ExecuteOptions = {},
   ): Promise<URL> {
     const sha = await getCommitSHA1(commitish, options) ?? commitish;
     const urlBase = formatURLBase(fetchURL);
-    const pathname = `commit/${sha}`;
+    const pathname = `commits/${sha}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
@@ -25,7 +26,7 @@ export const service: HostingService = {
     _options?: ExecuteOptions,
   ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
-    const pathname = `tree/${commitish}/${path}`;
+    const pathname = `src/${commitish}/${path}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
@@ -36,18 +37,15 @@ export const service: HostingService = {
     { range }: { range?: Range } & ExecuteOptions = {},
   ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
+    if (!range || extname(path) !== ".md") {
+      const suffix = formatSuffix(range);
+      const pathname = `src/${commitish}/${path}${suffix}`;
+      return Promise.resolve(new URL(`${urlBase}/${pathname}`));
+    }
+    // Bitbucket does not provide `?plain=1` like GitHub so we need to use annotation URL
+    // instead to proerply select the line range of Markdown file
     const suffix = formatSuffix(range);
-    const pathname = `blob/${commitish}/${path}${suffix}`;
-    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
-  },
-
-  getPullRequestURL(
-    fetchURL: URL,
-    n: number,
-    _options?: ExecuteOptions,
-  ): Promise<URL> {
-    const urlBase = formatURLBase(fetchURL);
-    const pathname = `pull/${n}`;
+    const pathname = `annotate/${commitish}/${path}${suffix}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 };
@@ -58,13 +56,10 @@ function formatURLBase(fetchURL: URL): string {
 }
 
 function formatSuffix(range: Range | undefined): string {
-  // Note:
-  // Without `?plain=1`, GitHub shows the rendering result of content (e.g. Markdown) so that we
-  // cannot specify the line range.
   if (Array.isArray(range)) {
-    return `?plain=1#L${range[0]}-L${range[1]}`;
+    return `#lines-${range[0]}:${range[1]}`;
   } else if (range) {
-    return `?plain=1#L${range}`;
+    return `#lines-${range}`;
   }
   return "";
 }

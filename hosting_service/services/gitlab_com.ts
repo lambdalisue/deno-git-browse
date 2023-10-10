@@ -10,11 +10,11 @@ export const service: HostingService = {
   async getCommitURL(
     fetchURL: URL,
     commitish: string,
-    options?: ExecuteOptions,
+    options: ExecuteOptions = {},
   ): Promise<URL> {
     const sha = await getCommitSHA1(commitish, options) ?? commitish;
     const urlBase = formatURLBase(fetchURL);
-    const pathname = `commit/${sha}`;
+    const pathname = `-/commit/${sha}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
@@ -25,7 +25,7 @@ export const service: HostingService = {
     _options?: ExecuteOptions,
   ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
-    const pathname = `tree/${commitish}/${path}`;
+    const pathname = `-/tree/${commitish}/${path}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 
@@ -37,17 +37,7 @@ export const service: HostingService = {
   ): Promise<URL> {
     const urlBase = formatURLBase(fetchURL);
     const suffix = formatSuffix(range);
-    const pathname = `blob/${commitish}/${path}${suffix}`;
-    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
-  },
-
-  getPullRequestURL(
-    fetchURL: URL,
-    n: number,
-    _options?: ExecuteOptions,
-  ): Promise<URL> {
-    const urlBase = formatURLBase(fetchURL);
-    const pathname = `pull/${n}`;
+    const pathname = `-/blob/${commitish}/${path}${suffix}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
 };
@@ -62,7 +52,7 @@ function formatSuffix(range: Range | undefined): string {
   // Without `?plain=1`, GitHub shows the rendering result of content (e.g. Markdown) so that we
   // cannot specify the line range.
   if (Array.isArray(range)) {
-    return `?plain=1#L${range[0]}-L${range[1]}`;
+    return `?plain=1#L${range[0]}-${range[1]}`;
   } else if (range) {
     return `?plain=1#L${range}`;
   }

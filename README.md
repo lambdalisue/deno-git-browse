@@ -5,7 +5,14 @@
 [![Test](https://github.com/lambdalisue/deno-git-browse/workflows/Test/badge.svg)](https://github.com/lambdalisue/deno-git-browse/actions?query=workflow%3ATest)
 
 Open the URL of the hosting service for the repository using the system web
-browser.
+browser. The following hosting services are currently supported:
+
+- GitHub (https://github.com)
+- GitLab (https://gitlab.com)
+- Bitbucket (https://bitbucket.org)
+
+See [./hosting_service/services](./hosting_service/services) and create a PR to
+support more hosting services.
 
 ## Usage
 
