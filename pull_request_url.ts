@@ -1,6 +1,11 @@
 import { execute, ExecuteOptions } from "./process.ts";
 import { getHostingService } from "./hosting_service/mod.ts";
-import { getCommitSHA1, getRemoteContains, getRemoteFetchURL } from "./util.ts";
+import {
+  __throw,
+  getCommitSHA1,
+  getRemoteContains,
+  getRemoteFetchURL,
+} from "./util.ts";
 
 type Options = ExecuteOptions & {
   remote?: string;
@@ -11,16 +16,12 @@ export async function getPullRequestURL(
   commitish: string,
   options: Options = {},
 ): Promise<URL> {
-  if (!options.remote) {
-    const remote = await getRemoteContains(commitish, options);
-    return getPullRequestURL(commitish, {
-      ...options,
-      remote: remote ?? "origin",
-    });
-  }
-  const fetchURL = await getRemoteFetchURL(options.remote, options);
+  const remote = options.remote ??
+    await getRemoteContains(commitish, options) ??
+    "origin";
+  const fetchURL = await getRemoteFetchURL(remote, options);
   if (!fetchURL) {
-    throw new Error(`Remote '${options.remote}' has no fetch URL`);
+    throw new Error(`No remote '${remote}' found`);
   }
   const hostingService = await getHostingService(fetchURL, options);
   if (!hostingService.getPullRequestURL) {
@@ -30,7 +31,7 @@ export async function getPullRequestURL(
   }
   const pr = await getPullRequestContains(
     commitish,
-    options.remote,
+    remote,
     options,
   );
   if (!pr) {
@@ -45,7 +46,9 @@ async function getPullRequestContains(
   options: ExecuteOptions = {},
 ): Promise<number | undefined> {
   const branch = await getRemoteDefaultBranch(remote, options) ?? "main";
-  const sha = await getCommitSHA1(commitish, options);
+  const sha = await getCommitSHA1(commitish, options) ?? __throw(
+    new Error(`No commit found for ${commitish}`),
+  );
   let stdout: string;
   // The sha may points to a merge commit itself.
   stdout = await execute(

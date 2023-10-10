@@ -12,6 +12,29 @@ OPTIONS
       --permalink      Use a permalink instead of a regular URL.
       --remote=REMOTE  Use a URL from the specified remote repository.
 
+ALIASES
+  To enable support for non-standard repository URLs (e.g., GitHub Enterprise), you can create aliases
+  for the repository URL. To define these aliases, create a file named "aliases.json" within the
+  specified configuration directory, as illustrated below:
+
+  {
+    "my.github.com": "github.com",
+    // Add more aliases as needed
+  }
+
+  This file needs to be stored in the "browse" directory within the configuration directory, as 
+  indicated by the following paths based on your operating system:
+
+  ┌─────────┬────────────────────────────────────────────┬──────────────────────────────────────────┐
+  │ OS      │ Value                                      │ Example                                  │
+  ├─────────┼────────────────────────────────────────────┼──────────────────────────────────────────┤
+  │ Linux   │ ($XDG_CONFIG_HOME or $HOME/.config)/browse │ /home/alisue/.config/browse              │
+  ├─────────┼────────────────────────────────────────────┼──────────────────────────────────────────┤
+  │ macOS   │ $HOME/Library/Preferences/browse           │ /Users/alisue/Library/Preferences/browse │
+  ├─────────┼────────────────────────────────────────────┼──────────────────────────────────────────┤
+  │ Windows │ $APPDATA\browse                            │ C:\Users\alisue\AppData\Roaming\browse   │
+  └─────────┴────────────────────────────────────────────┴──────────────────────────────────────────┘
+
 EXAMPLES
   $ browse
   #=> Opens a tree page of the current working directory in the HEAD commit of the current branch

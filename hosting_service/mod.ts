@@ -26,8 +26,26 @@ export async function getHostingService(
 ): Promise<HostingService> {
   const hostname = aliases?.[fetchURL.hostname] ?? fetchURL.hostname;
   const svcName = hostname.replace(/\W/g, "_");
-  const svc = await import(
-    new URL(`./services/${svcName}.ts`, import.meta.url).href
-  );
-  return svc.service;
+  try {
+    const svc = await import(
+      new URL(`./services/${svcName}.ts`, import.meta.url).href
+    );
+    return svc.service;
+  } catch (err: unknown) {
+    if (err instanceof TypeError) {
+      // TypeError: Module not found "...".
+      throw new UnsupportedHostingServiceError(hostname, svcName);
+    }
+    throw err;
+  }
+}
+
+export class UnsupportedHostingServiceError extends Error {
+  constructor(
+    public hostname: string,
+    public svcName: string,
+  ) {
+    super(`Unsupported hosting service: ${hostname} (${svcName})`);
+    this.name = this.constructor.name;
+  }
 }

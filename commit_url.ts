@@ -11,13 +11,12 @@ export async function getCommitURL(
   commitish: string,
   options: Options = {},
 ): Promise<URL> {
-  if (!options.remote) {
-    const remote = await getRemoteContains(commitish, options);
-    return getCommitURL(commitish, { ...options, remote: remote ?? "origin" });
-  }
-  const fetchURL = await getRemoteFetchURL(options.remote, options);
+  const remote = options.remote ??
+    await getRemoteContains(commitish, options) ??
+    "origin";
+  const fetchURL = await getRemoteFetchURL(remote, options);
   if (!fetchURL) {
-    throw new Error(`Remote '${options.remote}' has no fetch URL`);
+    throw new Error(`No remote '${remote}' found`);
   }
   const hostingService = await getHostingService(fetchURL, options);
   return hostingService.getCommitURL(fetchURL, commitish);
