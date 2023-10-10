@@ -1,7 +1,9 @@
-#!/usr/bin/env -S deno run --allow-run --allow-read
+#!/usr/bin/env -S deno run --allow-run --allow-read --allow-env
 import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
+import { join } from "https://deno.land/std@0.194.0/path/mod.ts";
 import { ensure, is } from "https://deno.land/x/unknownutil@v3.2.0/mod.ts";
 import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
+import config_dir from "https://deno.land/x/dir@1.5.1/config_dir/mod.ts";
 import {
   getCommitAbbrevRef,
   getCommitSHA1,
@@ -27,6 +29,7 @@ export async function getURL(
   commitish: string,
   options: Options = {},
 ): Promise<URL> {
+  options.aliases = options.aliases ?? await readAliasesFile();
   if (options.home) {
     return getHomeURL(options);
   }
@@ -47,6 +50,23 @@ export async function getURL(
     return getCommitURL(commitish, options);
   }
   return getObjectURL(commitish, options.path ?? ".", options);
+}
+
+export async function readAliasesFile(): Promise<Record<string, string>> {
+  const cdir = config_dir();
+  if (!cdir) {
+    return {};
+  }
+  try {
+    return await import(join(cdir, "browse", "aliases.json"), {
+      assert: { type: "json" },
+    });
+  } catch (err) {
+    if (err instanceof TypeError) {
+      return {};
+    }
+    throw err;
+  }
 }
 
 async function main(args: string[]): Promise<void> {
