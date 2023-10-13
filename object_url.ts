@@ -40,7 +40,12 @@ async function getObjectType(
     ["ls-tree", "-t", commitish, path],
     options,
   );
-  return stdout.trim().split("\n").at(0)?.split(" ").at(1) as ObjectType;
+  return stdout
+    .trim()
+    .split("\n")
+    .find((line) => line.includes(path))
+    ?.split(" ")
+    .at(1) as ObjectType;
 }
 
 function parsePath(path: string): [string, Range | undefined] {
