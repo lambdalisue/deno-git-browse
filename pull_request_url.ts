@@ -88,7 +88,7 @@ async function getRemoteDefaultBranch(
     ["remote", "show", remote],
     options,
   );
-  const m = stdout.match(/HEAD branch: (.*)$/);
+  const m = stdout.match(/HEAD branch: (.*)/);
   if (!m) {
     return undefined;
   }
