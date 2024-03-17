@@ -1,5 +1,5 @@
 import { execute, ExecuteOptions } from "./process.ts";
-import { getHostingService } from "./hosting_service/mod.ts";
+import { getHostingService, HostingService } from "./hosting_service/mod.ts";
 import {
   __throw,
   getCommitSHA1,
@@ -30,6 +30,7 @@ export async function getPullRequestURL(
     );
   }
   const pr = await getPullRequestContains(
+    hostingService,
     commitish,
     remote,
     options,
@@ -41,10 +42,14 @@ export async function getPullRequestURL(
 }
 
 async function getPullRequestContains(
+  hostingService: HostingService,
   commitish: string,
   remote: string,
   options: ExecuteOptions = {},
 ): Promise<number | undefined> {
+  if (!hostingService.extractPullRequestID) {
+    throw new Error("Hosting service has no pull request ID extractor");
+  }
   const branch = await getRemoteDefaultBranch(remote, options) ?? "main";
   const sha = await getCommitSHA1(commitish, options) ?? __throw(
     new Error(`No commit found for ${commitish}`),
@@ -54,13 +59,12 @@ async function getPullRequestContains(
   stdout = await execute(
     [
       "log",
-      "--oneline",
       "-1",
       sha,
     ],
     options,
   );
-  const pr = parseMerges(stdout);
+  const pr = hostingService.extractPullRequestID(stdout);
   if (pr) {
     return pr;
   }
@@ -70,14 +74,13 @@ async function getPullRequestContains(
     [
       "log",
       "--merges",
-      "--oneline",
       "--reverse",
       "--ancestry-path",
       ancestraryPath,
     ],
     options,
   );
-  return parseMerges(stdout);
+  return hostingService.extractPullRequestID(stdout);
 }
 
 async function getRemoteDefaultBranch(
@@ -93,16 +96,4 @@ async function getRemoteDefaultBranch(
     return undefined;
   }
   return m[1].trim();
-}
-
-function parseMerges(stdout: string): number | undefined {
-  const record = stdout.trim().split("\n").at(0);
-  if (!record) {
-    return undefined;
-  }
-  const m = record.match(/Merge pull request #(\d+)/);
-  if (!m) {
-    return undefined;
-  }
-  return Number(m[1]);
 }

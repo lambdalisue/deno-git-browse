@@ -205,187 +205,201 @@ snapshot[`getHostingService 29`] = `
 
 snapshot[`getHostingService 30`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse",
-  url: "https://gitlab.com/lambdalisue/deno-git-browse",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/merge_requests/1",
+  url: "ssh://git@gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 31`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/commit/2120c87633f4059656e8aada8eebe62768892b46",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 32`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/tree/v0.1.0/bin",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/commit/2120c87633f4059656e8aada8eebe62768892b46",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 33`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/tree/v0.1.0/bin",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 34`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 35`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10-20",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 36`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/README.md?plain=1#L10-20",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 37`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts?plain=1#L10",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 38`] = `
 {
-  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts?plain=1#L10-20",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts?plain=1#L10",
   url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 39`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse",
-  url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/blob/v0.1.0/bin/browse.ts?plain=1#L10-20",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 40`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/commits/2120c87633f4059656e8aada8eebe62768892b46",
-  url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
+  result: "https://gitlab.com/lambdalisue/deno-git-browse/-/merge_requests/1",
+  url: "https://gitlab.com/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 41`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 42`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/README.md",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/commits/2120c87633f4059656e8aada8eebe62768892b46",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 43`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 44`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10:20",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/README.md",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 45`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 46`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10:20",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 47`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10:20",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts",
   url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 48`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse",
-  url: "https://bitbucket.org/lambdalisue/deno-git-browse",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10",
+  url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 49`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/commits/2120c87633f4059656e8aada8eebe62768892b46",
-  url: "https://bitbucket.org/lambdalisue/deno-git-browse",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10:20",
+  url: "ssh://git@bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 50`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 51`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/README.md",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/commits/2120c87633f4059656e8aada8eebe62768892b46",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 52`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 53`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10:20",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/README.md",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 54`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 55`] = `
 {
-  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10",
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/annotate/v0.1.0/README.md#lines-10:20",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",
 }
 `;
 
 snapshot[`getHostingService 56`] = `
+{
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts",
+  url: "https://bitbucket.org/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 57`] = `
+{
+  result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10",
+  url: "https://bitbucket.org/lambdalisue/deno-git-browse",
+}
+`;
+
+snapshot[`getHostingService 58`] = `
 {
   result: "https://bitbucket.org/lambdalisue/deno-git-browse/src/v0.1.0/bin/browse.ts#lines-10:20",
   url: "https://bitbucket.org/lambdalisue/deno-git-browse",

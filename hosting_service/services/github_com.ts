@@ -50,6 +50,14 @@ export const service: HostingService = {
     const pathname = `pull/${n}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
+
+  extractPullRequestID(commit: string): number | undefined {
+    const m = commit.match(/Merge pull request #(\d+)/);
+    if (m) {
+      return Number(m[1]);
+    }
+    return undefined;
+  },
 };
 
 function formatURLBase(fetchURL: URL): string {
