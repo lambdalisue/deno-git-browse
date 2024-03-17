@@ -59,7 +59,7 @@ export async function readAliasesFile(): Promise<Record<string, string>> {
   }
   try {
     return await import(join(cdir, "browse", "aliases.json"), {
-      assert: { type: "json" },
+      with: { type: "json" },
     });
   } catch (err) {
     if (err instanceof TypeError) {
