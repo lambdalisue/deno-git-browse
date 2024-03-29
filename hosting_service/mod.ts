@@ -30,6 +30,10 @@ export type HostingService = {
     number: number,
     options?: ExecuteOptions,
   ): Promise<URL>;
+
+  extractPullRequestID?(
+    commit: string,
+  ): number | undefined;
 };
 
 /**

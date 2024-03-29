@@ -40,6 +40,24 @@ export const service: HostingService = {
     const pathname = `-/blob/${commitish}/${path}${suffix}`;
     return Promise.resolve(new URL(`${urlBase}/${pathname}`));
   },
+
+  getPullRequestURL(
+    fetchURL: URL,
+    n: number,
+    _options?: ExecuteOptions,
+  ): Promise<URL> {
+    const urlBase = formatURLBase(fetchURL);
+    const pathname = `-/merge_requests/${n}`;
+    return Promise.resolve(new URL(`${urlBase}/${pathname}`));
+  },
+
+  extractPullRequestID(commit: string): number | undefined {
+    const m = commit.match(/See merge request (?:.*)!(\d+)/);
+    if (m) {
+      return Number(m[1]);
+    }
+    return undefined;
+  },
 };
 
 function formatURLBase(fetchURL: URL): string {
