@@ -1,4 +1,4 @@
-import { execute, ExecuteError, ExecuteOptions } from "./process.ts";
+import { execute, ExecuteError, type ExecuteOptions } from "./process.ts";
 
 /**
  * A helper function to throw error

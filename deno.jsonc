@@ -1,5 +1,8 @@
 {
   "lock": false,
+  "name": "@lambdalisue/git-browse",
+  "version": "0.0.0",
+  "exports": "./mod.ts",
   "tasks": {
     "test": "deno test -A --parallel --doc",
     "check": "deno check **/*.ts",

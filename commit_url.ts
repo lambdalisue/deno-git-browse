@@ -18,6 +18,6 @@ export async function getCommitURL(
   if (!fetchURL) {
     throw new Error(`No remote '${remote}' found`);
   }
-  const hostingService = await getHostingService(fetchURL, options);
+  const hostingService = getHostingService(fetchURL, options);
   return hostingService.getCommitURL(fetchURL, commitish);
 }
