@@ -1,9 +1,9 @@
 #!/usr/bin/env -S deno run --allow-run --allow-read --allow-env
-import { parse } from "https://deno.land/std@0.194.0/flags/mod.ts";
-import { join } from "https://deno.land/std@0.194.0/path/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.2.0/mod.ts";
-import { systemopen } from "https://deno.land/x/systemopen@v0.2.0/mod.ts";
-import config_dir from "https://deno.land/x/dir@1.5.1/config_dir/mod.ts";
+import { parse } from "jsr:@std/flags";
+import { join } from "jsr:@std/path";
+import { ensure, is } from "jsr:@core/unknownutil";
+import { systemopen } from "jsr:@lambdalisue/systemopen";
+import { dir } from "jsr:@cross/dir";
 import {
   getCommitAbbrevRef,
   getCommitSHA1,
@@ -53,7 +53,7 @@ export async function getURL(
 }
 
 export async function readAliasesFile(): Promise<Record<string, string>> {
-  const cdir = config_dir();
+  const cdir = await dir("config");
   if (!cdir) {
     return {};
   }
