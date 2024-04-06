@@ -1,6 +1,6 @@
 import type { HostingService, Range } from "../mod.ts";
 import type { ExecuteOptions } from "../../process.ts";
-import { extname } from "https://deno.land/std@0.202.0/path/mod.ts";
+import { extname } from "jsr:@std/path";
 import { getCommitSHA1 } from "../../util.ts";
 
 export const service: HostingService = {

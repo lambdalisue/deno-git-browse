@@ -1,5 +1,5 @@
-import { assertThrows } from "https://deno.land/std@0.202.0/assert/mod.ts";
-import { assertSnapshot } from "https://deno.land/std@0.202.0/testing/snapshot.ts";
+import { assertThrows } from "jsr:@std/assert";
+import { assertSnapshot } from "jsr:@std/testing/snapshot";
 import { getHostingService, UnsupportedHostingServiceError } from "./mod.ts";
 
 Deno.test("getHostingService", async (t) => {

@@ -1,8 +1,5 @@
-import { stub } from "https://deno.land/std@0.202.0/testing/mock.ts";
-import {
-  assertEquals,
-  unreachable,
-} from "https://deno.land/std@0.202.0/assert/mod.ts";
+import { stub } from "jsr:@std/testing/mock";
+import { assertEquals, unreachable } from "jsr:@std/assert";
 import { _internals, ExecuteError } from "./process.ts";
 import {
   getCommitAbbrevRef,
