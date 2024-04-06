@@ -1,11 +1,11 @@
-import { assertRejects } from "https://deno.land/std@0.202.0/assert/mod.ts";
+import { assertThrows } from "https://deno.land/std@0.202.0/assert/mod.ts";
 import { assertSnapshot } from "https://deno.land/std@0.202.0/testing/snapshot.ts";
 import { getHostingService, UnsupportedHostingServiceError } from "./mod.ts";
 
 Deno.test("getHostingService", async (t) => {
-  await t.step("throws error for unsupported hosting service", async () => {
+  await t.step("throws error for unsupported hosting service", () => {
     const url = new URL("https://example.com/lambdalisue/deno-git-browse");
-    await assertRejects(
+    assertThrows(
       () => {
         return getHostingService(url);
       },
@@ -22,7 +22,7 @@ Deno.test("getHostingService", async (t) => {
     new URL("https://bitbucket.org/lambdalisue/deno-git-browse"),
   ];
   for (const url of urls) {
-    const svc = await getHostingService(url);
+    const svc = getHostingService(url);
 
     await t.step(`getHomeURL for ${url}`, async () => {
       const result = await svc.getHomeURL(url);
@@ -134,7 +134,7 @@ Deno.test("getHostingService with alias", async (t) => {
   };
 
   for (const url of urls) {
-    const svc = await getHostingService(url, { aliases });
+    const svc = getHostingService(url, { aliases });
 
     await t.step(`getHomeURL for ${url}`, async () => {
       const result = await svc.getHomeURL(url);

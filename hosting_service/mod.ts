@@ -1,4 +1,13 @@
 import type { ExecuteOptions } from "../process.ts";
+import { service as bitbucket_org } from "./services/bitbucket_org.ts";
+import { service as github_com } from "./services/github_com.ts";
+import { service as gitlab_com } from "./services/gitlab_com.ts";
+
+const serviceMap = {
+  bitbucket_org,
+  github_com,
+  gitlab_com,
+};
 
 export type Range = number | [number, number];
 
@@ -39,24 +48,18 @@ export type HostingService = {
 /**
  * Get git hosting service from URL
  */
-export async function getHostingService(
+export function getHostingService(
   fetchURL: URL,
   { aliases }: { aliases?: Record<string, string> } = {},
-): Promise<HostingService> {
+): HostingService {
   const hostname = aliases?.[fetchURL.hostname] ?? fetchURL.hostname;
   const svcName = hostname.replace(/\W/g, "_");
-  try {
-    const svc = await import(
-      new URL(`./services/${svcName}.ts`, import.meta.url).href
-    );
-    return svc.service;
-  } catch (err: unknown) {
-    if (err instanceof TypeError) {
-      // TypeError: Module not found "...".
-      throw new UnsupportedHostingServiceError(hostname, svcName);
-    }
-    throw err;
+  // deno-lint-ignore no-explicit-any
+  const svc = (serviceMap as any)[svcName];
+  if (!svc) {
+    throw new UnsupportedHostingServiceError(hostname, svcName);
   }
+  return svc;
 }
 
 export class UnsupportedHostingServiceError extends Error {

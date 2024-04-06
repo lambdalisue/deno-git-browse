@@ -1,5 +1,8 @@
-import { execute, ExecuteOptions } from "./process.ts";
-import { getHostingService, HostingService } from "./hosting_service/mod.ts";
+import { execute, type ExecuteOptions } from "./process.ts";
+import {
+  getHostingService,
+  type HostingService,
+} from "./hosting_service/mod.ts";
 import {
   __throw,
   getCommitSHA1,
@@ -23,7 +26,7 @@ export async function getPullRequestURL(
   if (!fetchURL) {
     throw new Error(`No remote '${remote}' found`);
   }
-  const hostingService = await getHostingService(fetchURL, options);
+  const hostingService = getHostingService(fetchURL, options);
   if (!hostingService.getPullRequestURL) {
     throw new Error(
       `Hosting service of ${fetchURL} has no pull request URL`,

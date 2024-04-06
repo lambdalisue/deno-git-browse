@@ -17,6 +17,6 @@ export async function getHomeURL(
   if (!fetchURL) {
     throw new Error(`No remote '${remote}' found or failed to get fetch URL.`);
   }
-  const hostingService = await getHostingService(fetchURL, options);
+  const hostingService = getHostingService(fetchURL, options);
   return hostingService.getHomeURL(fetchURL);
 }

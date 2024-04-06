@@ -1,5 +1,5 @@
-import { execute, ExecuteOptions } from "./process.ts";
-import { getHostingService, Range } from "./hosting_service/mod.ts";
+import { execute, type ExecuteOptions } from "./process.ts";
+import { getHostingService, type Range } from "./hosting_service/mod.ts";
 import { getRemoteContains, getRemoteFetchURL } from "./util.ts";
 
 type Options = ExecuteOptions & {
@@ -20,7 +20,7 @@ export async function getObjectURL(
   if (!fetchURL) {
     throw new Error(`No remote '${remote}' found`);
   }
-  const hostingService = await getHostingService(fetchURL, options);
+  const hostingService = getHostingService(fetchURL, options);
   const [normPath, range] = parsePath(path);
   const objectType = await getObjectType(commitish, normPath, options);
   if (objectType === "tree") {

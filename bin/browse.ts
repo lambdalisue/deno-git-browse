@@ -58,11 +58,11 @@ export async function readAliasesFile(): Promise<Record<string, string>> {
     return {};
   }
   try {
-    return await import(join(cdir, "browse", "aliases.json"), {
-      with: { type: "json" },
-    });
+    return JSON.parse(
+      await Deno.readTextFile(join(cdir, "browse", "aliases.json")),
+    );
   } catch (err) {
-    if (err instanceof TypeError) {
+    if (err instanceof Deno.errors.NotFound) {
       return {};
     }
     throw err;
