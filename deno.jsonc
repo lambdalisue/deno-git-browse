@@ -2,7 +2,10 @@
   "lock": false,
   "name": "@lambdalisue/git-browse",
   "version": "0.0.0",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./mod.ts",
+    "./cli": "./bin/browse.ts"
+  },
   "tasks": {
     "test": "deno test -A --parallel --doc",
     "check": "deno check **/*.ts",
