@@ -1,9 +1,9 @@
 #!/usr/bin/env -S deno run --allow-run --allow-read --allow-env
-import { parse } from "jsr:@std/flags";
-import { join } from "jsr:@std/path";
-import { ensure, is } from "jsr:@core/unknownutil";
-import { systemopen } from "jsr:@lambdalisue/systemopen";
-import { dir } from "jsr:@cross/dir";
+import { parseArgs } from "jsr:@std/cli@^0.221.0";
+import { join } from "jsr:@std/path@^0.221.0";
+import { ensure, is } from "jsr:@core/unknownutil@^3.17.2";
+import { systemopen } from "jsr:@lambdalisue/systemopen@^1.0.0";
+import { dir } from "jsr:@cross/dir@^1.1.0";
 import {
   getCommitAbbrevRef,
   getCommitSHA1,
@@ -70,7 +70,7 @@ export async function readAliasesFile(): Promise<Record<string, string>> {
 }
 
 async function main(args: string[]): Promise<void> {
-  const opts = parse(args, {
+  const opts = parseArgs(args, {
     boolean: [
       "commit",
       "help",
