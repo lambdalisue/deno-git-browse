@@ -1,4 +1,4 @@
-import { assert, assertRejects } from "jsr:@std/assert";
+import { assert, assertRejects } from "jsr:@std/assert@^0.221.0";
 import { execute, ExecuteError } from "./process.ts";
 
 Deno.test("execute() runs 'git' and return a stdout on success", async () => {
