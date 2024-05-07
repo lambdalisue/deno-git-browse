@@ -1,7 +1,7 @@
 # git-browse
 
-[![jsr](https://img.shields.io/jsr/v/%40lambdalisue/git-browse?logo=javascript&logoColor=white)](https://jsr.io/@lambdalisue/git-browse)
-[![denoland](https://img.shields.io/github/v/release/lambdalisue/deno-git-browse?logo=deno&label=denoland)](https://github.com/lambdalisue/deno-git-browse/releases)
+[![JSR](https://jsr.io/badges/@lambdalisue/git-browse)](https://jsr.io/@lambdalisue/git-browse)
+[![denoland](https://img.shields.io/github/v/release/lambdalisue/deno-git-browse?logo=deno&label=denoland)](https://deno.land/x/git_browse)
 [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/git_browse/mod.ts)
 [![Test](https://github.com/lambdalisue/deno-git-browse/workflows/Test/badge.svg)](https://github.com/lambdalisue/deno-git-browse/actions?query=workflow%3ATest)
 
@@ -66,7 +66,7 @@ Add the followings to your `.gitconfig`
 
 ```gitconfig
 [alias]
-  browse = "!deno run --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts"
+  browse = "!deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/git-browse/cli"
 ```
 
 Then use it as `git browse` like
@@ -80,7 +80,7 @@ $ git browse --help
 Use `deno install` command to install the command.
 
 ```console
-$ deno install --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts
+$ deno install --allow-net --allow-run --allow-read --allow-env -n browse jsr:@lambdalisue/git-browse/cli
 ```
 
 Then use it as `browse` like
