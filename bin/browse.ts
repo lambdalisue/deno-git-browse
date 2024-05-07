@@ -1,9 +1,9 @@
 #!/usr/bin/env -S deno run --allow-run --allow-read --allow-env
-import { parse } from "@std/flags";
-import { join } from "@std/path";
-import { ensure, is } from "@core/unknownutil";
-import { systemopen } from "@lambdalisue/systemopen";
-import { dir } from "@cross/dir";
+import { parse } from "jsr:@std/flags";
+import { join } from "jsr:@std/path";
+import { ensure, is } from "jsr:@core/unknownutil";
+import { systemopen } from "jsr:@lambdalisue/systemopen";
+import { dir } from "jsr:@cross/dir";
 import {
   getCommitAbbrevRef,
   getCommitSHA1,

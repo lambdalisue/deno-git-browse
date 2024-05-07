@@ -7,14 +7,5 @@
     "test": "deno test -A --parallel --doc",
     "check": "deno check **/*.ts",
     "upgrade": "deno run -A https://deno.land/x/udd/main.ts **/*.ts"
-  },
-  "imports": {
-    "@core/unknownutil": "jsr:@core/unknownutil@^3.17.2",
-    "@cross/dir": "jsr:@cross/dir@^1.1.0",
-    "@lambdalisue/systemopen": "jsr:@lambdalisue/systemopen@^1.0.0",
-    "@std/assert": "jsr:@std/assert@^0.221.0",
-    "@std/flags": "jsr:@std/flags@^0.221.0",
-    "@std/path": "jsr:@std/path@^0.221.0",
-    "@std/testing": "jsr:@std/testing@^0.221.0"
   }
 }

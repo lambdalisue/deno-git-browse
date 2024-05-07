@@ -1,5 +1,5 @@
-import { stub } from "@std/testing/mock";
-import { assertEquals, unreachable } from "@std/assert";
+import { stub } from "jsr:@std/testing/mock";
+import { assertEquals, unreachable } from "jsr:@std/assert";
 import { _internals, ExecuteError } from "./process.ts";
 import {
   getCommitAbbrevRef,
