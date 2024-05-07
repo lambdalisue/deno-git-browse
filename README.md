@@ -1,6 +1,6 @@
 # git-browse
 
-[![jsr](https://img.shields.io/jsr/v/%40lambdalisue/git-browse?logo=javascript&logoColor=white)](https://jsr.io/@lambdalisue/git-browse)
+[![JSR](https://jsr.io/badges/@lambdalisue/git-browse)](https://jsr.io/@lambdalisue/git-browse)
 [![denoland](https://img.shields.io/github/v/release/lambdalisue/deno-git-browse?logo=deno&label=denoland)](https://deno.land/x/git_browse)
 [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/git_browse/mod.ts)
 [![Test](https://github.com/lambdalisue/deno-git-browse/workflows/Test/badge.svg)](https://github.com/lambdalisue/deno-git-browse/actions?query=workflow%3ATest)
