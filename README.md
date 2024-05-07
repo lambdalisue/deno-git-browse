@@ -66,7 +66,7 @@ Add the followings to your `.gitconfig`
 
 ```gitconfig
 [alias]
-  browse = "!deno run --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts"
+  browse = "!deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/git-browse/cli"
 ```
 
 Then use it as `git browse` like
@@ -80,7 +80,7 @@ $ git browse --help
 Use `deno install` command to install the command.
 
 ```console
-$ deno install --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts
+$ deno install --allow-net --allow-run --allow-read --allow-env -n browse jsr:@lambdalisue/git-browse/cli
 ```
 
 Then use it as `browse` like
